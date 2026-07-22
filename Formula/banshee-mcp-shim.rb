@@ -4,16 +4,16 @@ class BansheeMcpShim < Formula
   version "0.4.0"
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-mcp-shim-aarch64-apple-darwin.tar.xz"
-    sha256 "33fdc99aab0714fb48c7432070c6bcffee07838668d9bf594113167958db5b92"
+    sha256 "649e87d7e1f0fe919973faa54364781d1da96d3155cd2e1e77b57a030691f68f"
   end
   if OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-mcp-shim-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "c4fb5b8832b5544502fb5bfc25789febc728f27ea9049a2d7d221f426105f1f7"
+      sha256 "5200ba40facd4d41af312ce4485b622afb81c1710f07258d8ee1c0b7eedd88ac"
     end
     if Hardware::CPU.intel?
       url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-mcp-shim-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "1cc86e218285d64453a1d414328092eab6b6c5c730d39e5376405a747118fcd7"
+      sha256 "2be618947fb13b061383f9508b989654175373187e0257cc0be1227a0d66b21c"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
