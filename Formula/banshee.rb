@@ -4,16 +4,16 @@ class Banshee < Formula
   version "0.4.0"
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-aarch64-apple-darwin.tar.xz"
-    sha256 "e40185710079895c94203abfecb064bbe3676c2a2cd53504ad190231f3cf9ed9"
+    sha256 "652003cc4cf5d10cb719056a07d673a8903c8e21466f4a08dff449916ac06e74"
   end
   if OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "818ce7ab8184f38496e65fd5243157cd2db45c4ae726584c3ef4f09f5e84fa16"
+      sha256 "291348b0993c2ea364c06a078697093660360d0fc77b61581a253d41d05a066d"
     end
     if Hardware::CPU.intel?
       url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "58f01355bbd4e73b8d9d56638f84004623e87ccf5d36092694d5369e11f23602"
+      sha256 "aa0498dbdb10c68773b750a82e28378a477c0e771c0f42e1ff51de68b08ed42b"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
