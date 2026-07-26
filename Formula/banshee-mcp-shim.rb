@@ -1,19 +1,19 @@
 class BansheeMcpShim < Formula
   desc "MCP stdio shim bridging any Model Context Protocol client to the Banshee voice daemon"
   homepage "https://github.com/yamanahlawat/banshee"
-  version "0.4.0"
+  version "0.5.0"
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-mcp-shim-aarch64-apple-darwin.tar.xz"
-    sha256 "649e87d7e1f0fe919973faa54364781d1da96d3155cd2e1e77b57a030691f68f"
+    url "https://github.com/yamanahlawat/banshee/releases/download/v0.5.0/banshee-mcp-shim-aarch64-apple-darwin.tar.xz"
+    sha256 "d1e9d24847ebe00420319a05ea44273f32ca3a99d1dfef95df0209111a20ff45"
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-mcp-shim-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "5200ba40facd4d41af312ce4485b622afb81c1710f07258d8ee1c0b7eedd88ac"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.5.0/banshee-mcp-shim-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "00d305db4e1b2a2993826fdd0331804b8cb809ed3a84b8fd9eca08439ea61dd0"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.4.0/banshee-mcp-shim-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "2be618947fb13b061383f9508b989654175373187e0257cc0be1227a0d66b21c"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.5.0/banshee-mcp-shim-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "a329ed82dad547223b794e189e005298fba6be32c62731bd5f940b2686c83b44"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
