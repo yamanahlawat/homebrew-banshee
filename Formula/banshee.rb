@@ -1,19 +1,19 @@
 class Banshee < Formula
   desc "Offline local voice daemon: push-to-talk dictation and spoken status feedback for AI coding agents"
   homepage "https://github.com/yamanahlawat/banshee"
-  version "0.6.0"
+  version "0.6.1"
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yamanahlawat/banshee/releases/download/v0.6.0/banshee-aarch64-apple-darwin.tar.xz"
-    sha256 "6b7089244b4b624fc059496e0ce387442828dcb81b0283bdb031e390d6c149a6"
+    url "https://github.com/yamanahlawat/banshee/releases/download/v0.6.1/banshee-aarch64-apple-darwin.tar.xz"
+    sha256 "0b351f91b2402e208a4b7132ffa1d4abe203ce85a5afff57a8032a434621cfad"
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.6.0/banshee-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "d614abf99efc6e6f61e632f31a852088e46b80ba94c84f4f6d1ceb179320033e"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.6.1/banshee-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "6d06d82a626ea585e47f60407f965d6d14bcc44a2df0b993b4f44142b0dfb428"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.6.0/banshee-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "7e9e8524c07e562e66b7001eba9e884f036cacf7ba8e7ef3f01c01c629ebd16d"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.6.1/banshee-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "e567ecc6fa1cbf6e3af2eebb2034bbe2342783848da447371e198683181eafb8"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
@@ -40,9 +40,9 @@ class Banshee < Formula
   end
 
   def install
-    bin.install "banshee" if OS.mac? && Hardware::CPU.arm?
-    bin.install "banshee" if OS.linux? && Hardware::CPU.arm?
-    bin.install "banshee" if OS.linux? && Hardware::CPU.intel?
+    bin.install "banshee", "banshee-mcp-shim" if OS.mac? && Hardware::CPU.arm?
+    bin.install "banshee", "banshee-mcp-shim" if OS.linux? && Hardware::CPU.arm?
+    bin.install "banshee", "banshee-mcp-shim" if OS.linux? && Hardware::CPU.intel?
 
     install_binary_aliases!
 
