@@ -1,19 +1,19 @@
 class Banshee < Formula
   desc "Offline local voice daemon: push-to-talk dictation and spoken status feedback for AI coding agents"
   homepage "https://github.com/yamanahlawat/banshee"
-  version "0.8.0"
+  version "0.9.0"
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yamanahlawat/banshee/releases/download/v0.8.0/banshee-aarch64-apple-darwin.tar.xz"
-    sha256 "fa2fa4192679c546580101e0b0bfc3714d12a3f60651f12136e5e7e5e82b904a"
+    url "https://github.com/yamanahlawat/banshee/releases/download/v0.9.0/banshee-aarch64-apple-darwin.tar.xz"
+    sha256 "362a4e0c44e00ac3fce63c9aac950cfd5cd06102e62c4590704f746e10d50543"
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.8.0/banshee-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "fa12ee19fbe2d42efcff765f9ce013407fe1089248efedb75b11464a1730ba21"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.9.0/banshee-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "50a586aaf4b83fe4cb8c4e8b267f9b9573e421dc7615c1309b5e3330c4af8ac0"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.8.0/banshee-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "d19b243346ff341d581a87eb39a433279535a96ddb50c0e78ba11fd094fba90d"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.9.0/banshee-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "47fd878506ffae25e54cc02b5a84c00c82bdbf8304605f01458b08a530db327d"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
@@ -41,13 +41,13 @@ class Banshee < Formula
 
   def install
     if OS.mac? && Hardware::CPU.arm?
-      bin.install "banshee", "banshee-mcp-shim"
+      bin.install "banshee", "banshee-mcp-shim", "banshee-tray"
     end
     if OS.linux? && Hardware::CPU.arm?
-      bin.install "banshee", "banshee-mcp-shim"
+      bin.install "banshee", "banshee-mcp-shim", "banshee-tray"
     end
     if OS.linux? && Hardware::CPU.intel?
-      bin.install "banshee", "banshee-mcp-shim"
+      bin.install "banshee", "banshee-mcp-shim", "banshee-tray"
     end
 
     install_binary_aliases!
