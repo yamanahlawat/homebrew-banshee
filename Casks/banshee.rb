@@ -1,6 +1,6 @@
 cask "banshee" do
-  version "0.12.1"
-  sha256 "5def0634662a5ab44d5cfd9d132a323c4f7e9ed0887782074552c4ded19441a1"
+  version "0.12.2"
+  sha256 "7b31400646556c6126a160a68fc588a972e32e9d6adebd3e02556a8aa4503fe7"
 
   url "https://github.com/yamanahlawat/banshee/releases/download/v#{version}/Banshee.app.tar.gz"
   name "Banshee"
