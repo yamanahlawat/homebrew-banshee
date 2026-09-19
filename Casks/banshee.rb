@@ -1,6 +1,12 @@
+# `banshee` and `banshee-mcp-shim` on the PATH are a wrapper, written by
+# `postflight_steps`. macOS kills a quarantined binary with no message at all,
+# so a person whose Banshee arrived through Homebrew sees a command that exits
+# and says nothing. The wrapper says what happened instead, and offers to clear
+# the flag when a person is there to ask.
+
 cask "banshee" do
-  version "0.14.0"
-  sha256 "642d14da807893428350c809f3092a0d4572551bd7914f6e5984b430208c6b2d"
+  version "0.15.0"
+  sha256 "bf8edec1067a84ac8e3d4f1825927ea90d4477ae043c383a0e9a317abf7a0c95"
 
   url "https://github.com/yamanahlawat/banshee/releases/download/v#{version}/Banshee.app.tar.gz"
   name "Banshee"
@@ -11,8 +17,6 @@ cask "banshee" do
   depends_on macos: :ventura
 
   app "Banshee.app"
-  binary "#{appdir}/Banshee.app/Contents/MacOS/banshee"
-  binary "#{appdir}/Banshee.app/Contents/MacOS/banshee-mcp-shim"
 
   # The formula is the same daemon without the window, and two copies fight for one socket;
   # the shim formula is an old one still in the tap. Casks can conflict only with casks.
@@ -33,6 +37,49 @@ cask "banshee" do
     end
   end
 
+  # Written here rather than shipped inside the app, and this is the whole
+  # reason: macOS kills anything executed from a quarantined bundle, a shell
+  # script included, so a wrapper that explains the silence has to live outside
+  # it. A file written here carries no quarantine flag and always runs. It
+  # clears nothing on its own. It runs the app binary named by its own name.
+  postflight_steps do
+    write_file "bin/banshee", <<~SH, base: :homebrew_prefix
+      #!/bin/sh
+      app="/Applications/Banshee.app"
+      if xattr -p com.apple.quarantine "$app" >/dev/null 2>&1; then
+          echo "Banshee is quarantined by macOS, so it cannot start." >&2
+          echo "Homebrew marks every download, including every upgrade." >&2
+          # Only a person can answer, so only a person is ever asked. A hook, an
+          # agent or the launch agent has no terminal and gets the line to run.
+          if [ -t 0 ] && [ -t 2 ]; then
+              printf 'Clear the flag for this app now? [y/N] ' >&2
+              read -r answer
+              # A terminal can end the line with a carriage return.
+              answer=$(printf '%s' "$answer" | tr -d '\\r')
+              case "$answer" in
+              [Yy] | [Yy][Ee][Ss]) xattr -dr com.apple.quarantine "$app" ;;
+              *)
+                  echo "Left alone. To clear it: xattr -dr com.apple.quarantine $app" >&2
+                  exit 1
+                  ;;
+              esac
+          else
+              echo "To clear it: xattr -dr com.apple.quarantine $app" >&2
+              exit 1
+          fi
+      fi
+      exec "$app/Contents/MacOS/$(basename "$0")" "$@"
+    SH
+    set_permissions "bin/banshee", "0755", base: :homebrew_prefix
+    symlink "bin/banshee", "bin/banshee-mcp-shim",
+            source_base: :homebrew_prefix, target_base: :homebrew_prefix, overwrite: true
+  end
+
+  # `remove` asks for no password; `delete` would.
+  uninstall_postflight_steps do
+    remove ["bin/banshee", "bin/banshee-mcp-shim"], base: :homebrew_prefix
+  end
+
   uninstall launchctl: [
               "com.banshee.daemon",
               "com.banshee.tray",
@@ -43,9 +90,11 @@ cask "banshee" do
 
   caveats do
     <<~EOS
-      Banshee is signed but not yet notarised, so macOS refuses the downloaded app
-      and kills the banshee command silently. Clear the flag once:
+      Banshee is signed but not yet notarised, so macOS refuses the downloaded app.
+      Clear the flag, and again after each upgrade, because Homebrew marks every
+      download:
         xattr -dr com.apple.quarantine #{appdir}/Banshee.app
+      The banshee command offers to do it for you the next time you run it.
     EOS
   end
 end
