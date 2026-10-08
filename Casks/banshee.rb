@@ -5,8 +5,8 @@
 # the flag when a person is there to ask.
 
 cask "banshee" do
-  version "0.16.1"
-  sha256 "a1e9d59a13174fe3ae99cae0db454c7050a41ac2d7a3325f54573fe72cfc84a7"
+  version "0.16.2"
+  sha256 "184daa1d63cedf261d8c5d0c59ceef68f1835c5c499e866234f6ccb682b8a4a7"
 
   url "https://github.com/yamanahlawat/banshee/releases/download/v#{version}/Banshee.app.tar.gz"
   name "Banshee"
