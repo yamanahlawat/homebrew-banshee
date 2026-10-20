@@ -1,22 +1,22 @@
 class Banshee < Formula
   desc "Offline local voice daemon: push-to-talk dictation and spoken status feedback for AI coding agents"
   homepage "https://github.com/yamanahlawat/banshee"
-  version "0.16.2"
+  version "0.16.3"
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yamanahlawat/banshee/releases/download/v0.16.2/banshee-aarch64-apple-darwin.tar.xz"
-    sha256 "83ffe68faf04756afe358a1f2930c229812d2568b24404956e76f075435749c7"
+    url "https://github.com/yamanahlawat/banshee/releases/download/v0.16.3/banshee-aarch64-apple-darwin.tar.xz"
+    sha256 "3f1abaa438eb22d519a05d771ad6d65ac1099028a34d69fa65481976fb0d9877"
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.16.2/banshee-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "32f4154ba7cc21e1fdc0304892a91c0c103760b95cd3c249ec95732950722be3"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.16.3/banshee-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "84b1bfcf1a8df24d1a321505307f98e342b3e5cb3791f96c7ab669904fddde1f"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/yamanahlawat/banshee/releases/download/v0.16.2/banshee-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "73b887e84dbade3f7b5a2bf41a90238bb8078c66aac486e84529eb7930fca125"
+      url "https://github.com/yamanahlawat/banshee/releases/download/v0.16.3/banshee-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "29245da4fe5781a5693863c2d64645a650c1c755f7b8a5ed14e47d8cb6c4bbde"
     end
   end
-  license any_of: ["MIT", "Apache-2.0"]
+  license "MIT"
 
   BINARY_ALIASES = {
     "aarch64-apple-darwin":      {},
